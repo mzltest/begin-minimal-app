@@ -1,33 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset=utf-8>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Hi from Begin!</title>
-  <link rel="stylesheet" href="https://static.begin.app/starter/default.css">
-  <link href="data:image/x-icon;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" rel="icon" type="image/x-icon">
+	<title>接受url参数</title>
 </head>
 <body>
-  <div class="center-text">
-    <img src="https://static.begin.app/starter/begin-logo.svg" style="max-width: 250px" class="center-text">
-    <div style="margin-bottom: 24px">
-      <h1 style="margin-bottom: 24px" class="center-text">
-        Howdy, Beginner!
-      </h1>
-      <p style="margin-bottom: 8px">
-        Get started by editing this file at:
-      </p>
-      <code>
-        public/index.html
-      </code>
-    </div>
-    <div>
-      <p style="margin-bottom: 8px">
-        View documentation at:
-      </p>
-      <a class="link" href="https://docs.begin.com" target="_blank">https://docs.begin.com</a>
-    </div>
-  </div>
-  <script type="module" src="index.js"></script>
+	<h1>下载的mp3</h1>
+	<div id="audio"></div>
+	<hr>
+	<h1>midi 预览（无乐器区分）</h1>
+	<div id="midi-preview"></div>
+	<hr>
+	<h1>midi下载</h1>
+	<a id="midi-link" href="">下载</a>
+	<hr>
+
+	<script>
+		// 解析url参数
+		function getParam(param) {
+			var urlParams = new URLSearchParams(window.location.search);
+			return urlParams.get(param);
+		}
+
+		// 获取音频和midi源
+		var audioSrc = decodeURIComponent(getParam("audiosrc"));
+		var midiPreviewSrc = decodeURIComponent(getParam("midipreviewsrc"));
+		var midiFile = decodeURIComponent(getParam("midifile"));
+
+		// 设置音频和midi源
+		document.getElementById("audio").innerHTML = "<audio src='" + audioSrc + "' controls></audio>";
+		document.getElementById("midi-preview").innerHTML = "<audio src='" + midiPreviewSrc + "' controls></audio>";
+		document.getElementById("midi-link").href = midiFile;
+	</script>
 </body>
 </html>
