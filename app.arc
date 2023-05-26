@@ -2,7 +2,7 @@
 mboard
 
 @http
-post /api/go/:path
+get /api/go/:path
 post /api/stat/:path
 get /api/info/:id
 post /api/create

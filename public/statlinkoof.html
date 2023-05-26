@@ -3,20 +3,19 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
-	<title>create</title>
+	<title>show</title>
 </head>
 <body>
 <div id="info"></div>
-    <script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/qzact/common/share/share.js"></script>
-
+ 
     var path = getParam("b");
-    var api = decodeURIComponent(getParam("a"));
+    var api = decodeURIComponent(getParam("a"));<br>
     <label for="api">api base url,https://xxx.xxx,no trailing slash</label>
-    <input type="text" name="api" id="api">
+    <input type="text" name="api" id="api"><br>
     <label for="path">path for use,make it attracting or unique</label>
-    <input type="text" name="path" id="path">
+    <input type="text" name="path" id="path"><br>
     <label for="password">pass for edit or view stats</label>
-    <input type="text" name="password" id="password">
+    <input type="text" name="password" id="password"><br>
     <button id="editgo" onclick="submit()">go</button>
 
 	<script>
@@ -24,15 +23,21 @@ function submit(){
     api=document.getElementById('api').value
     path=document.getElementById('path').value
     password=document.getElementById('password').value
-    redir=document.getElementById('redir').value
-    pdata = {path:path,password:password,redir:redir};
 
-fetch(`${api}/api/stat/${encodeURIComponent(path)}`)
+    pdata = {path:path,password:password};
+
+fetch(`${api}/api/stat/${encodeURIComponent(path)}`,{
+  method: 'POST', // or 'PUT'
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(pdata),
+})
 .then(response => response.json())
 .then(data => {
   if(data.ok==true){
     html='<ul>'
-    for(el of data.data){
+    for(el of data.data.data){
       html+=`<li onclick='showreplay("${el.key}")'>${new Date(el.ts).toLocaleDateString()}</li>`
     }
     document.getElementById('info').innerHTML=html+'</ul>'

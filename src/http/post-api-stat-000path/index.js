@@ -1,11 +1,11 @@
 let arc = require('@architect/functions')
 let data = require('@begin/data')
-exports.handler = async function http (req) {
-    if ('pathParameters' in request&& 'path' in request.pathParameters && request.pathParameters.query!=null ){
-        query=request.pathParameters.query
+exports.handler = async function http (request) {
+    if ('pathParameters' in request&& 'path' in request.pathParameters && request.pathParameters.path!=null ){
+        query=request.pathParameters.path
     }
     let parseBody = arc.http.helpers.bodyParser
-    body=parseBody(req)
+    body=parseBody(request)
     stat =await data.get({table:'stats',key:query})
     if (stat){
         if (stat.password!=body.password){

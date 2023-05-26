@@ -6,32 +6,32 @@
 	<title>create</title>
 </head>
 <body>
-    <script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/qzact/common/share/share.js"></script>
+    <script type="text/javascript" src="https://qzonestyle.gtimg.cn/qzone/qzact/common/share/share.js"></script>
 
     var path = getParam("b");
-    var api = decodeURIComponent(getParam("a"));
+    var api = decodeURIComponent(getParam("a"));<br>
     <label for="api">api base url,https://xxx.xxx,no trailing slash</label>
-    <input type="text" name="api" id="api">
+    <input type="text" name="api" id="api"><br>
     <label for="path">path for use,make it attracting or unique</label>
-    <input type="text" name="path" id="path">
+    <input type="text" name="path" id="path"><br>
     <label for="password">pass for edit or view stats</label>
-    <input type="text" name="password" id="password">
+    <input type="text" name="password" id="password"><br>
     <label for="redir">redir to where?</label>
-    <input type="text" name="redir" id="redir">
-    <button id="editgo" onclick="submit()">go</button>
+    <input type="text" name="redir" id="redir"><br>
+    <button id="editgo" onclick="submit()">go</button><br><br>
     shareinfo:<br>
     title:          '父爱，在你看不到的地方',
     summary:        '父爱如山，感觉不到只因身在此山中',
     pic:            'http://qzonestyle.gtimg.cn/aoi/sola/20150617094556_OvfOpoRKRB.png',
     url:            'http://qzs.qzone.qq.com//qzone/qzact/act/2015/father-day-m/index.html', <- same url as here
     <label for="title">title</label>
-    <input type="text" name="title" id="title">
+    <input type="text" name="title" id="title"><br>
     <label for="summary">summary</label>
-    <input type="text" name="summary" id="summary">
+    <input type="text" name="summary" id="summary"><br>
     <label for="pic">pic</label>
-    <input type="text" name="pic" id="pic">
+    <input type="text" name="pic" id="pic"><br>
     <label for="url">url</label>
-    <input type="text" name="url" id="url">
+    <input type="text" name="url" id="url"><br>
     <button id="sharego" onclick="set()">sharego</button>
 	<script>
 function submit(){
@@ -39,7 +39,7 @@ function submit(){
     path=document.getElementById('path').value
     password=document.getElementById('password').value
     redir=document.getElementById('redir').value
-    pdata = {path:path,password:password,redir:redir};
+    pdata = {path:path,password:password,url:redir};
 
 fetch(`${api}/api/create`, {
   method: 'POST', // or 'PUT'
