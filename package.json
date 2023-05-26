@@ -7,5 +7,9 @@
   },
   "devDependencies": {
     "@architect/sandbox": "^5.0"
+  },
+  "dependencies": {
+    "@architect/functions": "^6.0.0",
+    "@begin/data": "^4.0.2"
   }
 }

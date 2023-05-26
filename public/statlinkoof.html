@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+	<title>create</title>
+</head>
+<body>
+<div id="info"></div>
+    <script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/qzact/common/share/share.js"></script>
+
+    var path = getParam("b");
+    var api = decodeURIComponent(getParam("a"));
+    <label for="api">api base url,https://xxx.xxx,no trailing slash</label>
+    <input type="text" name="api" id="api">
+    <label for="path">path for use,make it attracting or unique</label>
+    <input type="text" name="path" id="path">
+    <label for="password">pass for edit or view stats</label>
+    <input type="text" name="password" id="password">
+    <button id="editgo" onclick="submit()">go</button>
+
+	<script>
+function submit(){
+    api=document.getElementById('api').value
+    path=document.getElementById('path').value
+    password=document.getElementById('password').value
+    redir=document.getElementById('redir').value
+    pdata = {path:path,password:password,redir:redir};
+
+fetch(`${api}/api/stat/${encodeURIComponent(path)}`)
+.then(response => response.json())
+.then(data => {
+  if(data.ok==true){
+    html='<ul>'
+    for(el of data.data){
+      html+=`<li onclick='showreplay("${el.key}")'>${new Date(el.ts).toLocaleDateString()}</li>`
+    }
+    document.getElementById('info').innerHTML=html+'</ul>'
+  }
+  else{
+    alert(data.err)
+  }
+})
+.catch((error) => {
+  console.error('Error:', error);
+});
+}
+
+function showreplay(key){
+    api=document.getElementById('api').value
+    fetch(`${api}/api/info/${encodeURIComponent(key)}`)
+.then(response => response.json())
+.then(data => {
+  if(data.ok==true){
+   console.log(data.data)
+alert('see ur console')
+}
+  else{
+    alert(data.err)
+  }
+})
+.catch((error) => {
+  console.error('Error:', error);
+});
+}
+	</script>
+</body>
+</html>

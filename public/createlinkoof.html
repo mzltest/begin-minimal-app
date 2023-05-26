@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+	<title>create</title>
+</head>
+<body>
+    <script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/qzact/common/share/share.js"></script>
+
+    var path = getParam("b");
+    var api = decodeURIComponent(getParam("a"));
+    <label for="api">api base url,https://xxx.xxx,no trailing slash</label>
+    <input type="text" name="api" id="api">
+    <label for="path">path for use,make it attracting or unique</label>
+    <input type="text" name="path" id="path">
+    <label for="password">pass for edit or view stats</label>
+    <input type="text" name="password" id="password">
+    <label for="redir">redir to where?</label>
+    <input type="text" name="redir" id="redir">
+    <button id="editgo" onclick="submit()">go</button>
+    shareinfo:<br>
+    title:          '父爱，在你看不到的地方',
+    summary:        '父爱如山，感觉不到只因身在此山中',
+    pic:            'http://qzonestyle.gtimg.cn/aoi/sola/20150617094556_OvfOpoRKRB.png',
+    url:            'http://qzs.qzone.qq.com//qzone/qzact/act/2015/father-day-m/index.html', <- same url as here
+    <label for="title">title</label>
+    <input type="text" name="title" id="title">
+    <label for="summary">summary</label>
+    <input type="text" name="summary" id="summary">
+    <label for="pic">pic</label>
+    <input type="text" name="pic" id="pic">
+    <label for="url">url</label>
+    <input type="text" name="url" id="url">
+    <button id="sharego" onclick="set()">sharego</button>
+	<script>
+function submit(){
+    api=document.getElementById('api').value
+    path=document.getElementById('path').value
+    password=document.getElementById('password').value
+    redir=document.getElementById('redir').value
+    pdata = {path:path,password:password,redir:redir};
+
+fetch(`${api}/api/create`, {
+  method: 'POST', // or 'PUT'
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(pdata),
+})
+.then(response => response.json())
+.then(data => {
+  if(data.ok==true){
+    alert(JSON.stringify(data))
+    document.getElementById('api').value=encodeURIComponent(api)
+  }
+  else{
+    alert(data.err)
+  }
+})
+.catch((error) => {
+  console.error('Error:', error);
+});
+
+}
+
+function set(){
+    title=document.getElementById('title').value
+    summary=document.getElementById('summary').value
+    pic=document.getElementById('pic').value
+    url=document.getElementById('url').value
+    setShareInfo({
+         title:          '父爱，在你看不到的地方',
+         summary:        '父爱如山，感觉不到只因身在此山中',
+         pic:            'http://qzonestyle.gtimg.cn/aoi/sola/20150617094556_OvfOpoRKRB.png',
+         url:            'http://qzs.qzone.qq.com//qzone/qzact/act/2015/father-day-m/index.html',
+         WXconfig:       {
+             swapTitleInWX: true,
+             appId: '',
+             timestamp: '',
+             nonceStr: '',
+             signature: ''
+         }
+     });
+}
+	</script>
+</body>
+</html>
