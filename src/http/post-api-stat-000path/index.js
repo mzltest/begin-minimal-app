@@ -5,7 +5,7 @@ exports.handler = async function http (req) {
         query=request.pathParameters.query
     }
     let parseBody = arc.http.helpers.bodyParser
-    body=parseBody(req.body)
+    body=parseBody(req)
     stat =await data.get({table:'stats',key:query})
     if (stat){
         if (stat.password!=body.password){
